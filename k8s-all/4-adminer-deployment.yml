@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer
+  labels:
+    app: adminer-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer-front
+  template:
+    metadata:
+      labels:
+        app: adminer-front
+    spec:
+      containers:
+        - name: adminer
+          image: adminer
+          env:
+            - name: ADMINER_DEFAULT_SERVER
+              value: mysqldb
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
